@@ -55,14 +55,46 @@ LinqQueries queries= new LinqQueries();
 //Console.WriteLine($"Suma total de paginas:{queries.SumaDeTodasLasPaginasLibrosEntre200y500()}");
 
 //Libros publicados despues del 2015
-Console.WriteLine(queries.TitulosDeLibrosDespuesDel2015Concatenados());
+//Console.WriteLine(queries.TitulosDeLibrosDespuesDel2015Concatenados());
 
+//Promedio de caracteres de los titulos de los libros
+//Console.WriteLine($"promedio de los titulos {queries.PromedioCaracteresTitulo () }");
 
+//Libros publicados a partir del 2000 agrupados por anio
+//ImprimirGrupo(queries.LibrosDespuesDel2000AgrupadosporAnio());
+
+//Diccionario de libros agrupados por primera letra del titlo
+//ImprimirDiccionario(queries.DiccionariosDeLibrosPorLetra(),'S');
+
+//Libros filtrados con la clausula join
+ImprimirValores(queries.LibrosDespuesdel2005ConMasDe500Pags());
 void ImprimirValores(IEnumerable<Book> listadelibros)
 {
     Console.WriteLine("{0,-60} {1,15} {2,15}\n","Titulo","N paginas","Fecha publicacion");
     foreach (var item in listadelibros)
     {
         Console.WriteLine("{0,-60} {1,15} {2,15}",item.Title,item.PageCount,item.PublishedDate.ToShortDateString());
+    }  
+}
+
+void ImprimirGrupo(IEnumerable<IGrouping<int,Book>> ListadeLibros)
+{
+    foreach(var grupo in ListadeLibros)
+    {
+        Console.WriteLine("");
+        Console.WriteLine($"Grupo: { grupo.Key }");
+        Console.WriteLine("{0,-60} {1, 15} {2, 15}\n", "Titulo", "N. Paginas", "Fecha publicacion");
+        foreach(var item in grupo)
+        {
+            Console.WriteLine("{0,-60} {1, 15} {2, 15}",item.Title,item.PageCount,item.PublishedDate.Date.ToShortDateString()); 
+        }
     }
+}
+void ImprimirDiccionario(ILookup<char,Book> listadelibros, char letra)
+{
+    Console.WriteLine("{0,-60} {1,15} {2,15}\n","Titulo","N paginas","Fecha publicacion");
+    foreach (var item in listadelibros[letra])
+    {
+        Console.WriteLine("{0,-60} {1,15} {2,15}",item.Title,item.PageCount,item.PublishedDate.ToShortDateString());
+    }  
 }

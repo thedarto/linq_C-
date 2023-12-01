@@ -133,4 +133,28 @@ public class LinqQueries
         return TitulosLibros;
         } );
     }
+    //average: retorna el promedio
+    public double PromedioCaracteresTitulo()
+    {
+        return librosCollection.Average(p=>p.Title.Length);
+    }
+    //*****ÖPERADORES DE AGRUPAMIENTO
+    //gROUPBY: agrupar elmentos de diferentes tablas por la propiedad que que necesita
+    public IEnumerable<IGrouping<int,Book>> LibrosDespuesDel2000AgrupadosporAnio()
+    {
+        return librosCollection.Where(p=>p.PublishedDate.Year>=200).GroupBy(p=>p.PublishedDate.Year);
+    }
+    //lookup:agrupar en forma de diccionario
+    public ILookup<char,Book> DiccionariosDeLibrosPorLetra()
+    {
+        return librosCollection.ToLookup(p=>p.Title[0], p=>p);
+    }
+    //Join:Permite interceptar dos colecciones y devolver los elementos
+    public IEnumerable<Book> LibrosDespuesdel2005ConMasDe500Pags()
+    {
+        var LibrosDespuesdel2005=librosCollection.Where(p=>p.PublishedDate.Year>2005);
+        var LibrosConMasde500pag=librosCollection.Where(p=>p.PageCount>500);
+
+        return LibrosDespuesdel2005.Join(LibrosConMasde500pag, p=>p.Title, x=>x.Title,(p,x)=>p);
+    }
 }
