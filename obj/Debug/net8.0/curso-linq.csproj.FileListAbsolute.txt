@@ -12,3 +12,4 @@ C:\Users\SHACO\platzi\curso-linq\obj\Debug\net8.0\refint\curso-linq.dll
 C:\Users\SHACO\platzi\curso-linq\obj\Debug\net8.0\curso-linq.pdb
 C:\Users\SHACO\platzi\curso-linq\obj\Debug\net8.0\curso-linq.genruntimeconfig.cache
 C:\Users\SHACO\platzi\curso-linq\obj\Debug\net8.0\ref\curso-linq.dll
+C:\Users\SHACO\platzi\curso-linq\obj\Debug\net8.0\curso-linq.sourcelink.json
